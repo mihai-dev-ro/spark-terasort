@@ -222,5 +222,11 @@
     <artifactId>guava</artifactId>                                            
     <version>18.0</version>
   </dependency> 
+  <!-- https://mvnrepository.com/artifact/ch.cern.sparkmeasure/spark-measure -->
+  <dependency>
+      <groupId>ch.cern.sparkmeasure</groupId>
+      <artifactId>spark-measure_2.12</artifactId>
+      <version>0.16</version>
+  </dependency>
 </dependencies>
 </project>
