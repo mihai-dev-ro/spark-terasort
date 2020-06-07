@@ -222,16 +222,28 @@
     <artifactId>guava</artifactId>                                            
     <version>18.0</version>
   </dependency> 
+  <!-- https://mvnrepository.com/artifact/com.squareup.okio/okio -->
+  <dependency>
+    <groupId>com.squareup.okio</groupId>
+    <artifactId>okio</artifactId>
+    <version>1.17.5</version>
+  </dependency>
   <!-- shading the multiple dependencies of different versions -->
   <dependency>
     <groupId>com.squareup.okhttp3</groupId>
     <artifactId>okhttp</artifactId>
-    <version>3.11.0</version>
+    <version>3.8.1</version>
   </dependency>
   <dependency>
     <groupId>com.squareup.okhttp3</groupId>
     <artifactId>logging-interceptor</artifactId>
-    <version>3.11.0</version>
+    <version>3.8.1</version>
+  </dependency>
+  <!-- https://mvnrepository.com/artifact/org.influxdb/influxdb-java -->
+  <dependency>
+      <groupId>org.influxdb</groupId>
+      <artifactId>influxdb-java</artifactId>
+      <version>2.7</version>
   </dependency>
   <!-- https://mvnrepository.com/artifact/ch.cern.sparkmeasure/spark-measure -->
   <dependency>
