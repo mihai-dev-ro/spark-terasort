@@ -47,7 +47,7 @@ object TeraGen {
       .setAppName(s"TeraGen ($size)")
     val sc = new SparkContext(conf)
 
-    val parts = 10 //sc.defaultParallelism
+    val parts = 100 //sc.defaultParallelism
     val recordsPerPartition = outputSizeInBytes / 100 / parts.toLong
     val numRecords = recordsPerPartition * parts.toLong
 
