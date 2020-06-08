@@ -174,7 +174,7 @@
     <plugin>                                                                  
       <groupId>org.apache.maven.plugins</groupId>                             
       <artifactId>maven-shade-plugin</artifactId>                             
-      <!-- <version>2.2</version>   -->
+      <version>3.2.4</version>
       <executions>
         <execution>
             <phase>package</phase>
@@ -184,6 +184,22 @@
         </execution>
       </executions>
       <configuration>
+        <shadedArtifactAttached>false</shadedArtifactAttached>
+        <artifactSet>
+            <includes>
+                <include>*:*</include>
+            </includes>
+        </artifactSet>
+        <filters>
+            <filter>
+                <artifact>*:*</artifact>
+                <excludes>
+                    <exclude>META-INF/*.SF</exclude>
+                    <exclude>META-INF/*.DSA</exclude>
+                    <exclude>META-INF/*.RSA</exclude>
+                </excludes>
+            </filter>
+        </filters>
         <relocations>
           <relocation>                                                        
             <pattern>com.google.common</pattern>                              
@@ -204,17 +220,7 @@
             <pattern>okio</pattern>                              
             <shadedPattern>com.shaded.okio</shadedPattern> 
           </relocation>                                                          
-        </relocations>
-        <filters>
-          <filter>
-            <artifact>*:*</artifact>
-            <excludes>
-              <exclude>META-INF/*.SF</exclude>
-              <exclude>META-INF/*.DSA</exclude>
-              <exclude>META-INF/*.RSA</exclude>
-            </excludes>
-          </filter>
-        </filters>                                                        
+        </relocations>                                                       -->
       </configuration>   
     </plugin>
   </plugins>
