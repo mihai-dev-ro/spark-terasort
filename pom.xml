@@ -95,115 +95,122 @@
           <jvmArg>-Xmx1024m</jvmArg>
         </jvmArgs>
       </configuration>
-  </plugin>
-  <plugin>                                                                  
-      <groupId>org.apache.maven.plugins</groupId>                             
-      <artifactId>maven-dependency-plugin</artifactId>                        
-      <executions>                                                            
-        <!-- When using SPARK_PREPEND_CLASSES Spark classes compiled locally don't use
-             shaded deps. So here we store jars in their original form which are added
-             when the classpath is computed. 
-        -->                              
-        <execution>                                                           
-          <id>copy-dependencies</id>                                          
-          <phase>package</phase>                                              
-          <goals>                                                             
-            <goal>copy-dependencies</goal>                                    
-          </goals>                                                            
-          <configuration>                                                      
-            <outputDirectory>${project.build.directory}</outputDirectory>     
-            <overWriteReleases>false</overWriteReleases>                      
-            <overWriteSnapshots>false</overWriteSnapshots>                    
-            <overWriteIfNewer>true</overWriteIfNewer>                         
-            <useSubDirectoryPerType>true</useSubDirectoryPerType>             
-            <includeArtifactIds>                                              
-              guava
-            </includeArtifactIds>                                             
-            <silent>true</silent>                                             
-          </configuration>                                                    
-        </execution>                                                          
-      </executions>                                                           
-    </plugin>  
-    <plugin>
-      <artifactId>maven-assembly-plugin</artifactId>
-      <version>2.4.1</version>
-      <configuration>
-        <descriptorRefs>
-          <descriptorRef>jar-with-dependencies</descriptorRef>
-        </descriptorRefs>
-      </configuration>
-      <executions>
-        <execution>
-          <id>make-assembly</id>
-          <phase>package</phase>
-          <goals>
-            <goal>single</goal>
-          </goals>
-        </execution>
-      </executions>
-  </plugin>
-  <plugin>
-      <groupId>org.apache.maven.plugins</groupId>
-      <artifactId>maven-source-plugin</artifactId>
-      <version>2.4</version>
-  </plugin>
-  <plugin>
-    <groupId>org.scalastyle</groupId>
-    <artifactId>scalastyle-maven-plugin</artifactId>
-    <version>0.4.0</version>
-    <configuration>
-      <verbose>false</verbose>
-      <failOnViolation>true</failOnViolation>
-      <includeTestSourceDirectory>false</includeTestSourceDirectory>
-      <failOnWarning>false</failOnWarning>
-      <sourceDirectory>${basedir}/src/main/scala</sourceDirectory>
-      <testSourceDirectory>${basedir}/src/test/scala</testSourceDirectory>
-      <configLocation>scalastyle-config.xml</configLocation>
-      <outputFile>scalastyle-output.xml</outputFile>
-      <outputEncoding>UTF-8</outputEncoding>
-    </configuration>
-    <executions>
-      <execution>
-        <phase>package</phase>
-        <goals>
-          <goal>check</goal>
-        </goals>
-      </execution>
-    </executions>
     </plugin>
     <plugin>                                                                  
         <groupId>org.apache.maven.plugins</groupId>                             
-        <artifactId>maven-shade-plugin</artifactId>                             
-        <version>2.2</version>  
+        <artifactId>maven-dependency-plugin</artifactId>                        
+        <executions>                                                            
+          <!-- When using SPARK_PREPEND_CLASSES Spark classes compiled locally don't use
+                shaded deps. So here we store jars in their original form which are added
+                when the classpath is computed. 
+          -->                              
+          <execution>                                                           
+            <id>copy-dependencies</id>                                          
+            <phase>package</phase>                                              
+            <goals>                                                             
+              <goal>copy-dependencies</goal>                                    
+            </goals>                                                            
+            <configuration>                                                      
+              <outputDirectory>${project.build.directory}</outputDirectory>     
+              <overWriteReleases>false</overWriteReleases>                      
+              <overWriteSnapshots>false</overWriteSnapshots>                    
+              <overWriteIfNewer>true</overWriteIfNewer>                         
+              <useSubDirectoryPerType>true</useSubDirectoryPerType>             
+              <includeArtifactIds>                                              
+                guava
+              </includeArtifactIds>                                             
+              <silent>true</silent>                                             
+            </configuration>                                                    
+          </execution>                                                          
+        </executions>                                                           
+      </plugin>  
+      <plugin>
+        <artifactId>maven-assembly-plugin</artifactId>
+        <version>2.4.1</version>
         <configuration>
-          <relocations>
-            <relocation>                                                        
-              <pattern>com.google.common</pattern>                              
-              <shadedPattern>org.spark-project.guava</shadedPattern>            
-              <excludes>                                                        
-                <!--                                                            
-                  These classes cannot be relocated, because the Java API exposes the
-                  "Optional" type; the others are referenced by the Optional class.
-                -->                                                             
-                <exclude>com/google/common/base/Absent*</exclude>               
-                <exclude>com/google/common/base/Function</exclude>              
-                <exclude>com/google/common/base/Optional*</exclude>             
-                <exclude>com/google/common/base/Present*</exclude>              
-                <exclude>com/google/common/base/Supplier</exclude>              
-              </excludes>                                                       
-            </relocation>
-            <relocation>
-              <pattern>okio</pattern>                              
-              <shadedPattern>org.spark-project.okio</shadedPattern> 
-              <includes>
-                <include>okio.*</include>
-              </includes> 
-            </relocation>                                                          
-          </relocations>                                                        
-        </configuration>   
-      </plugin>
-    </plugins>
-  </build>
+          <descriptorRefs>
+            <descriptorRef>jar-with-dependencies</descriptorRef>
+          </descriptorRefs>
+        </configuration>
+        <executions>
+          <execution>
+            <id>make-assembly</id>
+            <phase>package</phase>
+            <goals>
+              <goal>single</goal>
+            </goals>
+          </execution>
+        </executions>
+    </plugin>
+    <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-source-plugin</artifactId>
+        <version>2.4</version>
+    </plugin>
+    <plugin>
+      <groupId>org.scalastyle</groupId>
+      <artifactId>scalastyle-maven-plugin</artifactId>
+      <version>0.4.0</version>
+      <configuration>
+        <verbose>false</verbose>
+        <failOnViolation>true</failOnViolation>
+        <includeTestSourceDirectory>false</includeTestSourceDirectory>
+        <failOnWarning>false</failOnWarning>
+        <sourceDirectory>${basedir}/src/main/scala</sourceDirectory>
+        <testSourceDirectory>${basedir}/src/test/scala</testSourceDirectory>
+        <configLocation>scalastyle-config.xml</configLocation>
+        <outputFile>scalastyle-output.xml</outputFile>
+        <outputEncoding>UTF-8</outputEncoding>
+      </configuration>
+      <executions>
+        <execution>
+          <phase>package</phase>
+          <goals>
+            <goal>check</goal>
+          </goals>
+        </execution>
+      </executions>
+    </plugin>
+    <plugin>                                                                  
+      <groupId>org.apache.maven.plugins</groupId>                             
+      <artifactId>maven-shade-plugin</artifactId>                             
+      <!-- <version>2.2</version>   -->
+      <configuration>
+        <relocations>
+          <relocation>                                                        
+            <pattern>com.google.common</pattern>                              
+            <shadedPattern>org.spark-project.guava</shadedPattern>            
+            <excludes>                                                        
+              <!--                                                            
+                These classes cannot be relocated, because the Java API exposes the
+                "Optional" type; the others are referenced by the Optional class.
+              -->                                                             
+              <exclude>com/google/common/base/Absent*</exclude>               
+              <exclude>com/google/common/base/Function</exclude>              
+              <exclude>com/google/common/base/Optional*</exclude>             
+              <exclude>com/google/common/base/Present*</exclude>              
+              <exclude>com/google/common/base/Supplier</exclude>              
+            </excludes>                                                       
+          </relocation>
+          <relocation>
+            <pattern>okio</pattern>                              
+            <shadedPattern>com.shaded.okio</shadedPattern> 
+          </relocation>                                                          
+        </relocations>
+        <filters>
+          <filter>
+            <artifact>*:*</artifact>
+            <excludes>
+              <exclude>META-INF/*.SF</exclude>
+              <exclude>META-INF/*.DSA</exclude>
+              <exclude>META-INF/*.RSA</exclude>
+            </excludes>
+          </filter>
+        </filters>                                                        
+      </configuration>   
+    </plugin>
+  </plugins>
+</build>
 
 <properties>
   <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -236,7 +243,7 @@
     <version>1.13.0</version>
   </dependency>
   <!-- shading the multiple dependencies of different versions -->
-  <dependency>
+  <!-- <dependency>
     <groupId>com.squareup.okhttp3</groupId>
     <artifactId>okhttp</artifactId>
     <version>3.13.1</version>
@@ -245,13 +252,13 @@
     <groupId>com.squareup.okhttp3</groupId>
     <artifactId>logging-interceptor</artifactId>
     <version>3.13.1</version>
-  </dependency>
+  </dependency> -->
   <!-- https://mvnrepository.com/artifact/org.influxdb/influxdb-java -->
-  <dependency>
+  <!-- <dependency>
       <groupId>org.influxdb</groupId>
       <artifactId>influxdb-java</artifactId>
       <version>2.15</version>
-  </dependency>
+  </dependency> -->
   <!-- https://mvnrepository.com/artifact/ch.cern.sparkmeasure/spark-measure -->
   <dependency>
       <groupId>ch.cern.sparkmeasure</groupId>
