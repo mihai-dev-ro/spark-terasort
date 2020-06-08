@@ -191,6 +191,20 @@
                 <exclude>com/google/common/base/Present*</exclude>              
                 <exclude>com/google/common/base/Supplier</exclude>              
               </excludes>                                                       
+            </relocation>
+            <relocation>
+              <pattern>okio</pattern>                              
+              <shadedPattern>org.spark-project.okio</shadedPattern> 
+              <includes>
+                <include>okio.*</include>
+              </includes> 
+            </relocation>   
+            <relocation>
+              <pattern>okhttp3</pattern>                              
+              <shadedPattern>org.spark-project.okhttp3</shadedPattern>
+              <includes>
+                <include>okhttp3.*</include>
+              </includes>  
             </relocation>                                                       
           </relocations>                                                        
         </configuration>   
