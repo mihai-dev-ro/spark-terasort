@@ -18,6 +18,7 @@
 package com.github.ehiggs.spark.terasort
 
 import org.apache.spark.{SparkConf, SparkContext}
+import ch.cern.sparkmeasure
 
 object TeraGen {
   def main(args: Array[String]) {
