@@ -146,11 +146,6 @@
         </executions>
         <configuration>
           <shadedArtifactAttached>false</shadedArtifactAttached>
-          <artifactSet>
-            <includes>
-              <include>*:*</include>
-            </includes>
-          </artifactSet>
           <filters>
             <filter>
               <artifact>*:*</artifact>
@@ -162,17 +157,6 @@
             </filter>
           </filters>
           <relocations>
-            <relocation>
-              <pattern>com.google.common</pattern>
-              <shadedPattern>org.spark-project.guava</shadedPattern>
-              <excludes>
-                <exclude>com/google/common/base/Absent*</exclude>
-                <exclude>com/google/common/base/Function</exclude>
-                <exclude>com/google/common/base/Optional*</exclude>
-                <exclude>com/google/common/base/Present*</exclude>
-                <exclude>com/google/common/base/Supplier</exclude>
-              </excludes>
-            </relocation>
             <relocation>
               <pattern>okio</pattern>
               <shadedPattern>com.shaded.okio</shadedPattern>
